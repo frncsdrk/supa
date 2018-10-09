@@ -1,10 +1,8 @@
 supa
 ===
 
-bash tool to update linux servers, also means soup in greek
+bash tool to update linux servers, also means soup in Greek
 
 ## usage
 
-```sh
-./supa.sh <user>@<host> [-u] [-r]
-```
+`./supa.sh <user>@<host> [-u] [-r]`
