@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-usage() { echo "Usage: ./supa.sh <user>@<host> [-u] [-r]"; }
+usage() { echo "Usage: ./supa.sh -o <user>@<host> [-h help] [-u upgrade] [-r reboot]"; }
 
 while getopts "ho:ru" option
 do

@@ -5,4 +5,4 @@ bash tool to update linux servers, also means soup in Greek
 
 ## usage
 
-`./supa.sh <user>@<host> [-u] [-r]`
+`Usage: ./supa.sh -o <user>@<host> [-h help] [-u upgrade] [-r reboot]`
