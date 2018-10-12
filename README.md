@@ -10,19 +10,21 @@ supa
 ```
 supa
 
-Usage: ./supa.sh -o <user>@<host> [-h help] [-u upgrade] [-r reboot]
+Usage: ./supa.sh -o <user>@<host> [-h help] [-u upgrade] [-p package] [-r reboot]
 
 Options:
-  -h                                   help
-  -u                                   upgrade
-  -r                                   reboot
-  -v                                   version
+  -h                                               help
+  -u                                               upgrade
+  -p                                               package
+  -r                                               reboot
+  -v                                               version
 
 Examples:
-  ./supa.sh -h                         display this message
-  ./supa.sh -o you@remote-host         run apt update and apt list --upgradeable
-  ./supa.sh -o you@remote-host -u      same as the former but with the addition of upgrading all packages
-  ./supa.sh -o you@remote-host -u -r   same as te former but with the addition of allowing reboot if necessary
+  ./supa.sh -h                                     display this message
+  ./supa.sh -o you@remote-host                     run apt update and apt list --upgradeable
+  ./supa.sh -o you@remote-host -u                  same as the former but with the addition of upgrading all packages
+  ./supa.sh -o you@remote-host -u -p [package]     same as the former but with the addition of upgrading one single package
+  ./supa.sh -o you@remote-host -u -r               same as te former but with the addition of allowing reboot if necessary
 
 ```
 
