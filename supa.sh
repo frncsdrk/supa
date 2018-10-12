@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION="v0.1.1"
+VERSION="v0.2.0"
 
 usage() {
   cat << EOF
