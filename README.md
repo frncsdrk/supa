@@ -14,6 +14,7 @@ Usage: ./supa.sh -o <user>@<host> [-h help] [-u upgrade] [-p package] [-r reboot
 
 Options:
   -h                                               help
+  -o                                               operator
   -u                                               upgrade
   -p                                               package
   -r                                               reboot
