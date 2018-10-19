@@ -6,57 +6,72 @@ usage() {
   cat << EOF
 supa
 
-Usage: ./supa.sh -o <user>@<host> [-h help] [-u upgrade] [-p package] [-a autoremove] [-r reboot] [-v version]
+Usage:
+  ./supa.sh -o <user>@<host> [-h|--help] [-u|--upgrade] [-p|--package] [-a|--autoremove] [-r|--reboot] [-v|--version]
 
 Options:
-  -a                                               autoremove
-  -h                                               help
-  -o                                               operator
-  -p                                               package
-  -r                                               reboot
-  -u                                               upgrade
-  -v                                               version
+  -a|--autoremove                                  autoremove
+  -h|--help                                        help
+  -o|--operator                                    operator
+  -p|--package                                     package
+  -r|--reboot                                      reboot
+  -u|--upgrade                                     upgrade
+  -v|--version                                     version
 
 Examples:
   ./supa.sh -h                                     display this message
   ./supa.sh -o you@remote-host                     run apt update and apt list --upgradeable
   ./supa.sh -o you@remote-host -u                  same as the former but with the addition of upgrading all packages
   ./supa.sh -o you@remote-host -u -p [package]     same as the former but with the addition of upgrading one single package
-  ./supa.sh -o you@remote-host -u -r               same as te former but with the addition of allowing reboot if necessary
-  ./supa.sh -o you@remote-host -u -a -r            same as te former but with the addition of autoremoving of obsolete packages
+  ./supa.sh -o you@remote-host -u -r               same as the former but with the addition of allowing reboot if necessary
+  ./supa.sh -o you@remote-host -u -a -r            same as the former but with the addition of autoremoving of obsolete packages
 
 EOF
 }
 
-while getopts "aho:pru:v" option
+POSITIONAL=()
+while [[ $# -gt 0 ]]
 do
-  case "${option}"
-  in
-    a)
-      AUTOREMOVE=${OPTIND}
+  key=$1
+
+  case $key in
+    -a|--autoremove)
+      AUTOREMOVE=1
+      shift
       ;;
-    h)
+    -h|--help)
       usage
       exit 0
       ;;
-    o)
-      OPERATOR=${OPTARG}
+    -o|--operator)
+      OPERATOR="$2"
+      shift
+      shift
       ;;
-    p)
-      UPGRADE_PACKAGE=${OPTARG}
+    -p|--package)
+      UPGRADE_PACKAGE="$2"
+      shift
+      shift
       ;;
-    r)
-      REBOOT=${OPTIND}
+    -r|--reboot)
+      REBOOT=1
+      shift
       ;;
-    u)
-      UPGRADE=${OPTIND}
+    -u|--upgrade)
+      UPGRADE=1
+      shift
       ;;
-    v)
+    -v|--version)
       echo "$VERSION"
       exit 0
       ;;
+    *)
+      POSITIONAL+=("$1")
+      shift
+      ;;
   esac
 done
+set -- "${POSITIONAL[@]}"
 
 SCRIPT=$'sudo apt update'
 SCRIPT+=$'\napt list --upgradeable'
