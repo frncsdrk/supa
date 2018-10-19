@@ -6,14 +6,15 @@ usage() {
   cat << EOF
 supa
 
-Usage: ./supa.sh -o <user>@<host> [-h help] [-u upgrade] [-p package] [-r reboot]
+Usage: ./supa.sh -o <user>@<host> [-h help] [-u upgrade] [-p package] [-a autoremove] [-r reboot] [-v version]
 
 Options:
+  -a                                               autoremove
   -h                                               help
   -o                                               operator
-  -u                                               upgrade
   -p                                               package
   -r                                               reboot
+  -u                                               upgrade
   -v                                               version
 
 Examples:
@@ -22,14 +23,18 @@ Examples:
   ./supa.sh -o you@remote-host -u                  same as the former but with the addition of upgrading all packages
   ./supa.sh -o you@remote-host -u -p [package]     same as the former but with the addition of upgrading one single package
   ./supa.sh -o you@remote-host -u -r               same as te former but with the addition of allowing reboot if necessary
+  ./supa.sh -o you@remote-host -u -a -r            same as te former but with the addition of autoremoving of obsolete packages
 
 EOF
 }
 
-while getopts "ho:rup:v" option
+while getopts "aho:pru:v" option
 do
   case "${option}"
   in
+    a)
+      AUTOREMOVE=${OPTIND}
+      ;;
     h)
       usage
       exit 0
@@ -37,14 +42,14 @@ do
     o)
       OPERATOR=${OPTARG}
       ;;
+    p)
+      UPGRADE_PACKAGE=${OPTARG}
+      ;;
     r)
       REBOOT=${OPTIND}
       ;;
     u)
       UPGRADE=${OPTIND}
-      ;;
-    p)
-      UPGRADE_PACKAGE=${OPTARG}
       ;;
     v)
       echo "$VERSION"
@@ -62,6 +67,9 @@ if [ ! -z "$UPGRADE" ]; then
   else
     SCRIPT+=$'\nsudo apt upgrade -y'
   fi
+fi
+if [ ! -z "$AUTOREMOVE" ]; then
+  SCRIPT+=$'\nsudo apt autoremove'
 fi
 if [ ! -z "$REBOOT" ]; then
   SCRIPT+=$'\nif [ -f "/var/run/reboot-required" ]; then'
