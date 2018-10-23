@@ -111,5 +111,4 @@ if [ ! -z "$REBOOT" ] || [ ! -z "$REBOOT_REQUIRED" ]; then
   SCRIPT+=$'\nfi'
 fi
 
-echo "$SCRIPT"
-# ssh "$OPERATOR" "$SCRIPT"
+ssh "$OPERATOR" "$SCRIPT"
