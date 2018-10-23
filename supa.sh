@@ -7,17 +7,21 @@ usage() {
 supa
 
 Usage:
-  ./supa.sh <user>@<host> [-h|--help] [-u|--upgrade <package>] [-a|--autoremove] [-r|--reboot] [-v|--version]
+  ./supa.sh <user>@<host> [-h|--help] [-v|--version]
+  [-u|--upgrade <package>] [-a|--autoremove] [-b|reboot-required] [-r|--reboot]
 
 Options:
   -a|--autoremove                                  autoremove
+  -b|--reboot-required                             reboot required
   -h|--help                                        help
   -r|--reboot                                      reboot
   -u|--upgrade                                     upgrade
   -v|--version                                     version
 
 Examples:
+  ./supa.sh -v                                     display version
   ./supa.sh -h                                     display this message
+  ./supa.sh -b                                     is machine reboot required
   ./supa.sh you@remote-host                        run apt update and apt list --upgradeable
   ./supa.sh you@remote-host -u                     same as the former but with the addition of upgrading all packages
   ./supa.sh you@remote-host -u <package>           same as the former but with the addition of upgrading one single package
@@ -35,6 +39,10 @@ do
   case $key in
     -a|--autoremove)
       AUTOREMOVE=1
+      shift
+      ;;
+    -b|--reboot-required)
+      REBOOT_REQUIRED=1
       shift
       ;;
     -h|--help)
@@ -82,9 +90,14 @@ fi
 if [ ! -z "$AUTOREMOVE" ]; then
   SCRIPT+=$'\nsudo apt -y autoremove'
 fi
-if [ ! -z "$REBOOT" ]; then
+if [ ! -z "$REBOOT" ] || [ ! -z "$REBOOT_REQUIRED" ]; then
   SCRIPT+=$'\nif [ -f "/var/run/reboot-required" ]; then'
-  SCRIPT+=$'\n  sudo /sbin/reboot now'
+  if [ ! -z "$REBOOT_REQUIRED" ]; then
+    SCRIPT+=$'\n  echo "machine reboot required"'
+  fi
+  if [ ! -z "$REBOOT" ]; then
+    SCRIPT+=$'\n  sudo /sbin/reboot now'
+  fi
   SCRIPT+=$'\nfi'
 fi
 
