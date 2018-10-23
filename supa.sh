@@ -61,7 +61,6 @@ do
       # get operator
       if [[ $1 =~ ^.+@.+$ ]]; then
         OPERATOR="$1"
-        echo "operator: $OPERATOR"
       fi
       POSITIONAL+=("$1")
       shift
