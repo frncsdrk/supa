@@ -7,13 +7,14 @@ usage() {
 supa
 
 Usage:
-  ./supa.sh <user>@<host> [-h|--help] [-v|--version]
+  ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list]
   [-u|--upgrade <package>] [-a|--autoremove] [-b|reboot-required] [-r|--reboot]
 
 Options:
   -a|--autoremove                                  autoremove
   -b|--reboot-required                             reboot required
   -h|--help                                        help
+  -l|--list                                        list
   -r|--reboot                                      reboot
   -u|--upgrade                                     upgrade
   -v|--version                                     version
@@ -22,6 +23,7 @@ Examples:
   ./supa.sh -v                                     display version
   ./supa.sh -h                                     display this message
   ./supa.sh -b                                     is machine reboot required
+  ./supa.sh -b -l                                  is machine reboot required, but list upgradeable packages as well
   ./supa.sh you@remote-host                        run apt update and apt list --upgradeable
   ./supa.sh you@remote-host -u                     same as the former but with the addition of upgrading all packages
   ./supa.sh you@remote-host -u <package>           same as the former but with the addition of upgrading one single package
@@ -48,6 +50,10 @@ do
     -h|--help)
       usage
       exit 0
+      ;;
+    -l|--list)
+      LIST=1
+      shift
       ;;
     -r|--reboot)
       REBOOT=1
@@ -77,8 +83,12 @@ do
 done
 set -- "${POSITIONAL[@]}"
 
-SCRIPT=$'sudo apt update'
-SCRIPT+=$'\napt list --upgradeable'
+SCRIPT="# supa $VERSION"
+
+if [ -z "$REBOOT_REQUIRED" ] || [ ! -z "$LIST" ]; then
+  SCRIPT+=$'\nsudo apt update'
+  SCRIPT+=$'\napt list --upgradeable'
+fi
 if [ ! -z "$UPGRADE" ]; then
   if [ ! -z "$UPGRADE_PACKAGE" ]; then
     SCRIPT+=$'\nsudo apt install --only-upgrade '
@@ -101,4 +111,5 @@ if [ ! -z "$REBOOT" ] || [ ! -z "$REBOOT_REQUIRED" ]; then
   SCRIPT+=$'\nfi'
 fi
 
-ssh "$OPERATOR" "$SCRIPT"
+echo "$SCRIPT"
+# ssh "$OPERATOR" "$SCRIPT"
