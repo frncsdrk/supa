@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# supa - *S*erver *Up*date *A*
 
 VERSION="v0.8.1"
 
@@ -33,82 +35,93 @@ Examples:
 EOF
 }
 
-POSITIONAL=()
-while [[ $# -gt 0 ]]
-do
-  key=$1
+get_args() {
+  local POSITIONAL=()
+  while [[ $# -gt 0 ]]
+  do
+    local key=$1
 
-  case $key in
-    -a|--autoremove)
-      AUTOREMOVE=1
-      shift
-      ;;
-    -b|--reboot-required)
-      REBOOT_REQUIRED=1
-      shift
-      ;;
-    -h|--help)
-      usage
-      exit 0
-      ;;
-    -l|--list)
-      LIST=1
-      shift
-      ;;
-    -r|--reboot)
-      REBOOT=1
-      shift
-      ;;
-    -u|--upgrade)
-      UPGRADE=1
-      if [[ $2 != "-"* ]]; then
-        UPGRADE_PACKAGE="$2"
-      fi
-      shift
-      shift
-      ;;
-    -v|--version)
-      echo "$VERSION"
-      exit 0
-      ;;
-    *)
-      # get operator
-      if [[ $1 =~ ^.+@.+$ ]]; then
-        OPERATOR="$1"
-      fi
-      POSITIONAL+=("$1")
-      shift
-      ;;
-  esac
-done
-set -- "${POSITIONAL[@]}"
+    case $key in
+      -a|--autoremove)
+        AUTOREMOVE=1
+        shift
+        ;;
+      -b|--reboot-required)
+        REBOOT_REQUIRED=1
+        shift
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      -l|--list)
+        LIST=1
+        shift
+        ;;
+      -r|--reboot)
+        REBOOT=1
+        shift
+        ;;
+      -u|--upgrade)
+        UPGRADE=1
+        if [[ $2 != "-"* ]]; then
+          UPGRADE_PACKAGE="$2"
+        fi
+        shift
+        shift
+        ;;
+      -v|--version)
+        echo "$VERSION"
+        exit 0
+        ;;
+      *)
+        # get operator
+        if [[ $1 =~ ^.+@.+$ ]]; then
+          OPERATOR="$1"
+        fi
+        POSITIONAL+=("$1")
+        shift
+        ;;
+    esac
+  done
+  set -- "${POSITIONAL[@]}"
+}
 
-SCRIPT="# supa $VERSION"
+build_script() {
+  SCRIPT="# supa $VERSION"
 
-if [ -z "$REBOOT_REQUIRED" ] || [ ! -z "$LIST" ]; then
-  SCRIPT+=$'\nsudo apt update'
-  SCRIPT+=$'\napt list --upgradeable'
-fi
-if [ ! -z "$UPGRADE" ]; then
-  if [ ! -z "$UPGRADE_PACKAGE" ]; then
-    SCRIPT+=$'\nsudo apt install --only-upgrade '
-    SCRIPT+="$UPGRADE_PACKAGE"
-  else
-    SCRIPT+=$'\nsudo apt upgrade -y'
+  if [ -z "$REBOOT_REQUIRED" ] || [ ! -z "$LIST" ]; then
+    SCRIPT+=$'\nsudo apt update'
+    SCRIPT+=$'\napt list --upgradeable'
   fi
-fi
-if [ ! -z "$AUTOREMOVE" ]; then
-  SCRIPT+=$'\nsudo apt -y autoremove'
-fi
-if [ ! -z "$REBOOT" ] || [ ! -z "$REBOOT_REQUIRED" ]; then
-  SCRIPT+=$'\nif [ -f "/var/run/reboot-required" ]; then'
-  if [ ! -z "$REBOOT_REQUIRED" ]; then
-    SCRIPT+=$'\n  echo "machine reboot required"'
+  if [ ! -z "$UPGRADE" ]; then
+    if [ ! -z "$UPGRADE_PACKAGE" ]; then
+      SCRIPT+=$'\nsudo apt install --only-upgrade '
+      SCRIPT+="$UPGRADE_PACKAGE"
+    else
+      SCRIPT+=$'\nsudo apt upgrade -y'
+    fi
   fi
-  if [ ! -z "$REBOOT" ]; then
-    SCRIPT+=$'\n  sudo /sbin/reboot now'
+  if [ ! -z "$AUTOREMOVE" ]; then
+    SCRIPT+=$'\nsudo apt -y autoremove'
   fi
-  SCRIPT+=$'\nfi'
-fi
+  if [ ! -z "$REBOOT" ] || [ ! -z "$REBOOT_REQUIRED" ]; then
+    SCRIPT+=$'\nif [ -f "/var/run/reboot-required" ]; then'
+    if [ ! -z "$REBOOT_REQUIRED" ]; then
+      SCRIPT+=$'\n  echo "machine reboot required"'
+    fi
+    if [ ! -z "$REBOOT" ]; then
+      SCRIPT+=$'\n  sudo /sbin/reboot now'
+    fi
+    SCRIPT+=$'\nfi'
+  fi
+}
 
-ssh "$OPERATOR" "$SCRIPT"
+main() {
+  get_args "$@"
+  build_script
+
+  ssh "$OPERATOR" "$SCRIPT"
+}
+
+main "$@"
