@@ -8,7 +8,7 @@ supa
 
 Usage:
   ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list]
-  [-u|--upgrade <package>] [-a|--autoremove] [-b|reboot-required] [-r|--reboot]
+  [-u|--upgrade <package>] [-a|--autoremove] [-b|--reboot-required] [-r|--reboot]
 
 Options:
   -a|--autoremove                                  autoremove
