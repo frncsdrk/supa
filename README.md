@@ -3,7 +3,7 @@ supa
 
 **S**erver **Up**date **A**
 
-> bash tool to update linux servers, also means soup in Greek
+> bash tool to update debian-based linux machines, also means soup in Greek
 
 ## usage
 
