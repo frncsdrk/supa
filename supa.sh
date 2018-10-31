@@ -11,11 +11,12 @@ supa
 Usage:
   ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
   [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove]
-  [-b|--reboot-required] [-r|--reboot]
+  [-b|--reboot-required] [-r|--reboot] [-d|--debug]
 
 Options:
   -a|--autoremove                                  autoremove
   -b|--reboot-required                             reboot required
+  -d|--debug                                       enable debug mode
   -h|--help                                        help
   -i|--identity                                    identity
   -l|--list                                        list
@@ -51,6 +52,10 @@ get_args() {
         ;;
       -b|--reboot-required)
         REBOOT_REQUIRED=1
+        shift
+        ;;
+      -d|--debug)
+        DEBUG=1
         shift
         ;;
       -h|--help)
@@ -134,6 +139,10 @@ build_script() {
 main() {
   get_args "$@"
   build_script
+
+  if [ ! -z "$DEBUG" ]; then
+    echo "$SCRIPT"
+  fi
 
   if [ ! -z "$IDENTITY" ]; then
     ssh -i "$IDENTITY" -o IdentitiesOnly=yes "$OPERATOR" "$SCRIPT"
