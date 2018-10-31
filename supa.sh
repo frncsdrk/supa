@@ -9,7 +9,7 @@ usage() {
 supa
 
 Usage:
-  ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list]
+  ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
   [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove]
   [-b|--reboot-required] [-r|--reboot]
 
@@ -19,6 +19,7 @@ Options:
   -h|--help                                        help
   -i|--identity                                    identity
   -l|--list                                        list
+  --list-off                                       list off, only update
   -r|--reboot                                      reboot
   -u|--upgrade                                     upgrade
   -v|--version                                     version
@@ -65,6 +66,10 @@ get_args() {
         LIST=1
         shift
         ;;
+      --list-off)
+        LIST_OFF=1
+        shift
+        ;;
       -r|--reboot)
         REBOOT=1
         shift
@@ -99,7 +104,9 @@ build_script() {
 
   if [ -z "$REBOOT_REQUIRED" ] || [ ! -z "$LIST" ]; then
     SCRIPT+=$'\nsudo apt update'
-    SCRIPT+=$'\napt list --upgradeable'
+    if [ -z "$LIST_OFF" ]; then
+      SCRIPT+=$'\napt list --upgradeable'
+    fi
   fi
   if [ ! -z "$UPGRADE" ]; then
     if [ ! -z "$UPGRADE_PACKAGE" ]; then

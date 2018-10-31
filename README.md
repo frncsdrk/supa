@@ -11,7 +11,7 @@ supa
 supa
 
 Usage:
-  ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list]
+  ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
   [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove]
   [-b|--reboot-required] [-r|--reboot]
 
@@ -21,6 +21,7 @@ Options:
   -h|--help                                        help
   -i|--identity                                    identity
   -l|--list                                        list
+  --list-off                                       list off, only update
   -r|--reboot                                      reboot
   -u|--upgrade                                     upgrade
   -v|--version                                     version
