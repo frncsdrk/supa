@@ -12,12 +12,14 @@ supa
 
 Usage:
   ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list]
-  [-u|--upgrade <package>] [-a|--autoremove] [-b|--reboot-required] [-r|--reboot]
+  [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove]
+  [-b|--reboot-required] [-r|--reboot]
 
 Options:
   -a|--autoremove                                  autoremove
   -b|--reboot-required                             reboot required
   -h|--help                                        help
+  -i|--identity                                    identity
   -l|--list                                        list
   -r|--reboot                                      reboot
   -u|--upgrade                                     upgrade

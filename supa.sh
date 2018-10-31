@@ -10,12 +10,14 @@ supa
 
 Usage:
   ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list]
-  [-u|--upgrade <package>] [-a|--autoremove] [-b|--reboot-required] [-r|--reboot]
+  [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove]
+  [-b|--reboot-required] [-r|--reboot]
 
 Options:
   -a|--autoremove                                  autoremove
   -b|--reboot-required                             reboot required
   -h|--help                                        help
+  -i|--identity                                    identity
   -l|--list                                        list
   -r|--reboot                                      reboot
   -u|--upgrade                                     upgrade
@@ -53,6 +55,11 @@ get_args() {
       -h|--help)
         usage
         exit 0
+        ;;
+      -i|--identity)
+        IDENTITY=$2
+        shift
+        shift
         ;;
       -l|--list)
         LIST=1
@@ -121,7 +128,11 @@ main() {
   get_args "$@"
   build_script
 
-  ssh "$OPERATOR" "$SCRIPT"
+  if [ ! -z "$IDENTITY" ]; then
+    ssh -i "$IDENTITY" -o IdentitiesOnly=yes "$OPERATOR" "$SCRIPT"
+  else
+    ssh "$OPERATOR" "$SCRIPT"
+  fi
 }
 
 main "$@"
