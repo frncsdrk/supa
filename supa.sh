@@ -10,7 +10,7 @@ supa
 
 Usage:
   ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
-  [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove]
+  [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove] [-m|--machines]
   [-b|--reboot-required] [-r|--reboot] [-d|--debug]
 
 Options:
@@ -21,6 +21,7 @@ Options:
   -i|--identity                                    identity
   -l|--list                                        list
   --list-off                                       list off, only update
+  -m|--machines                                    use given machines file
   -r|--reboot                                      reboot
   -u|--upgrade                                     upgrade
   -v|--version                                     version
@@ -28,8 +29,9 @@ Options:
 Examples:
   ./supa.sh -v                                     display version
   ./supa.sh -h                                     display this message
-  ./supa.sh -b                                     is machine reboot required
-  ./supa.sh -b -l                                  is machine reboot required, but list upgradeable packages as well
+  ./supa.sh you@remote-host -b                     is machine reboot required
+  ./supa.sh you@remote-host -b -l                  is machine reboot required, but list upgradeable packages as well
+  ./supa.sh -m production -b -l                    same as previous but use machines file
   ./supa.sh you@remote-host                        run apt update and apt list --upgradeable
   ./supa.sh you@remote-host -u                     same as the former but with the addition of upgrading all packages
   ./supa.sh you@remote-host -u <package>           same as the former but with the addition of upgrading one single package
@@ -37,6 +39,14 @@ Examples:
   ./supa.sh you@remote-host -u -a -r               same as the former but with the addition of autoremoving of obsolete packages
 
 EOF
+}
+
+generate_machines_list() {
+  if [ -v MACHINES_FILE ]; then
+    machines=$(cat $MACHINES_FILE | grep -v "^$\|^\s*\#")
+  else
+    machines=($OPERATOR)
+  fi
 }
 
 get_args() {
@@ -73,6 +83,11 @@ get_args() {
         ;;
       --list-off)
         LIST_OFF=1
+        shift
+        ;;
+      -m|--machines)
+        MACHINES_FILE="$2"
+        shift
         shift
         ;;
       -r|--reboot)
@@ -127,7 +142,9 @@ build_script() {
   if [ ! -z "$REBOOT" ] || [ ! -z "$REBOOT_REQUIRED" ]; then
     SCRIPT+=$'\nif [ -f "/var/run/reboot-required" ]; then'
     if [ ! -z "$REBOOT_REQUIRED" ]; then
-      SCRIPT+=$'\n  echo "machine reboot required"'
+      SCRIPT+=$'\n  echo "\n###########################"'
+      SCRIPT+=$'\n  echo "# machine reboot required #"'
+      SCRIPT+=$'\n  echo "###########################\n"'
     fi
     if [ ! -z "$REBOOT" ]; then
       SCRIPT+=$'\n  sudo /sbin/reboot now'
@@ -139,16 +156,23 @@ build_script() {
 main() {
   get_args "$@"
   build_script
+  generate_machines_list
 
   if [ ! -z "$DEBUG" ]; then
     echo "$SCRIPT"
   fi
-
-  if [ ! -z "$IDENTITY" ]; then
-    ssh -i "$IDENTITY" -o IdentitiesOnly=yes "$OPERATOR" "$SCRIPT"
-  else
-    ssh "$OPERATOR" "$SCRIPT"
-  fi
+  
+  for machine in $machines
+  do
+    echo $'\n###'
+    echo "# $machine"
+    echo $'###\n'
+    if [ ! -z "$IDENTITY" ]; then
+      ssh -i "$IDENTITY" -o IdentitiesOnly=yes "$machine" "$SCRIPT"
+    else
+      ssh "$machine" "$SCRIPT"
+    fi
+  done
 }
 
 main "$@"
