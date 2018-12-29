@@ -103,7 +103,7 @@ get_args() {
         shift
         ;;
       -v|--version)
-        echo "$VERSION"
+        printf '%s\n' "$VERSION"
         exit 0
         ;;
       *)
@@ -142,9 +142,9 @@ build_script() {
   if [ ! -z "$REBOOT" ] || [ ! -z "$REBOOT_REQUIRED" ]; then
     SCRIPT+=$'\nif [ -f "/var/run/reboot-required" ]; then'
     if [ ! -z "$REBOOT_REQUIRED" ]; then
-      SCRIPT+=$'\n  echo "\n###########################"'
-      SCRIPT+=$'\n  echo "# machine reboot required #"'
-      SCRIPT+=$'\n  echo "###########################\n"'
+      SCRIPT+=$'\n  printf \'\n%s\n\' "###########################"'
+      SCRIPT+=$'\n  printf \'%s\n\'   "# machine reboot required #"'
+      SCRIPT+=$'\n  printf \'%s\n\n\'   "###########################"'
     fi
     if [ ! -z "$REBOOT" ]; then
       SCRIPT+=$'\n  sudo /sbin/reboot now'
@@ -159,14 +159,14 @@ main() {
   generate_machines_list
 
   if [ ! -z "$DEBUG" ]; then
-    echo "$SCRIPT"
+    printf '%s\n' "$SCRIPT"
   fi
   
   for machine in $machines
   do
-    echo $'\n###'
-    echo "# $machine"
-    echo $'###\n'
+    printf '\n%s\n' '###'
+    printf '%s\n' "# $machine"
+    printf '%s\n\n' '###'
     if [ ! -z "$IDENTITY" ]; then
       ssh -i "$IDENTITY" -o IdentitiesOnly=yes "$machine" "$SCRIPT"
     else
