@@ -1,5 +1,4 @@
-supa
-===
+# supa
 
 **S**erver **Up**date **A**
 
@@ -54,3 +53,7 @@ me@remote-host2
 ## installation
 
 One way to "install" `supa` is to copy the `supa.sh` script as `supa` to `/usr/local/bin/`.
+
+## license
+
+[MIT](https://github.com/frncsdrk/supa/blob/master/LICENSE) (c) frncsdrk 2019
