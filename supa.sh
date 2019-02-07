@@ -2,7 +2,7 @@
 #
 # supa - *S*erver *Up*date *A*
 
-VERSION="v0.12.1"
+VERSION="v0.12.2"
 
 usage() {
   cat << EOF
