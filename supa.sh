@@ -121,6 +121,8 @@ get_args() {
 
 build_script() {
   SCRIPT="# supa $VERSION"
+  # ensure non interactive mode
+  SCRIPT+="export DEBIAN_FRONTEND=noninteractive"
 
   if [ -z "$REBOOT_REQUIRED" ] || [ ! -z "$LIST" ]; then
     SCRIPT+=$'\nsudo apt update'
