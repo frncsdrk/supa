@@ -122,7 +122,7 @@ get_args() {
 build_script() {
   SCRIPT="# supa $VERSION"
   # ensure non interactive mode
-  SCRIPT+="export DEBIAN_FRONTEND=noninteractive"
+  # SCRIPT+="export DEBIAN_FRONTEND=noninteractive"
 
   if [ -z "$REBOOT_REQUIRED" ] || [ ! -z "$LIST" ]; then
     SCRIPT+=$'\nsudo apt update'
@@ -132,10 +132,10 @@ build_script() {
   fi
   if [ ! -z "$UPGRADE" ]; then
     if [ ! -z "$UPGRADE_PACKAGE" ]; then
-      SCRIPT+=$'\nsudo apt install --only-upgrade '
+      SCRIPT+=$'\nDEBIAN_FRONTEND=noninteractive sudo apt install --only-upgrade '
       SCRIPT+="$UPGRADE_PACKAGE"
     else
-      SCRIPT+=$'\nsudo apt upgrade -y'
+      SCRIPT+=$'\nDEBIAN_FRONTEND=noninteractive sudo apt upgrade -y'
     fi
   fi
   if [ ! -z "$AUTOREMOVE" ]; then
