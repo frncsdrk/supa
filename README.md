@@ -9,7 +9,7 @@
 ```
 supa
 
-Synopsis:
+Usage:
   ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
   [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove] [-m|--machines]
   [-b|--reboot-required] [-r|--reboot] [-d|--debug]
