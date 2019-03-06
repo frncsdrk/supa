@@ -117,8 +117,7 @@ get_args() {
         ;;
       -i|--identity)
         IDENTITY=$2
-        shift
-        shift
+        shift 2
         ;;
       -l|--list)
         LIST=1
@@ -130,8 +129,7 @@ get_args() {
         ;;
       -m|--machines)
         MACHINES_FILE="$2"
-        shift
-        shift
+        shift 2
         ;;
       -r|--reboot)
         REBOOT=1
@@ -142,8 +140,7 @@ get_args() {
         if [[ $2 != "-"* ]]; then
           UPGRADE_PACKAGE="$2"
         fi
-        shift
-        shift
+        shift 2
         ;;
       -v|--version)
         printf '%s\n' "$VERSION"
