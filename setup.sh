@@ -26,7 +26,7 @@ check_os() {
   if [[ "$OSTYPE" == "linux-gnu" ]] || [[ "$OSTYPE" == "linux-musl" ]] ; then
     readonly _dir=$(dirname "$(readlink -f "$0" || echo "$(echo "$0" | sed -e 's,\\,/,g')")")
   else
-    printf "Unsupported system version.\\n"
+    printf "Unsupported system\\n"
     exit 1
   fi
 }
