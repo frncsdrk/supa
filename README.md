@@ -1,6 +1,6 @@
-# supa
+# supa.sh
 
-**S**erver **Up**date **A**
+**S**erver **Up**date with **A**pt
 
 > bash tool to update debian-based linux machines, also means soup in Greek
 
@@ -92,7 +92,7 @@ me@remote-host2
 
 ## installation
 
-One way to "install" `supa` is to copy the `supa.sh` script as `supa` to `/usr/local/bin/`.
+Run `./setup.sh` (may require `sudo`)
 
 ## license
 
