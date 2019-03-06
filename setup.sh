@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# setup script for supa.sh
 
 INSTALLABLE_NAME="supa.sh"
 
@@ -40,10 +42,6 @@ get_args() {
     local key=$1
 
     case $key in
-      -d|--debug)
-        DEBUG=1
-        shift
-        ;;
       -h|--help)
         usage
         exit 0
