@@ -88,6 +88,11 @@ generate_machines_list() {
 }
 
 get_args() {
+  if [[ -z $1 ]]; then
+    usage
+    exit 0
+  fi
+
   local POSITIONAL=()
   while [[ $# -gt 0 ]]
   do
