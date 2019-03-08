@@ -120,8 +120,8 @@ uninstall() {
 upgrade() {
   printf "%s\\n" "Replace man page from /usr/local/man/man8"
 
-  uninstall_manpage
-  install_manpage
+  uninstall
+  install
 }
 
 main() {
@@ -130,3 +130,4 @@ main() {
 }
 
 main "$@"
+exit 0
