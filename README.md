@@ -100,7 +100,14 @@ me@remote-host2
 
 ## installation
 
-Run `./setup.sh` (may require `sudo`)
+### automatically
+
+Run `curl https://raw.githubusercontent.com/frncsdrk/supa.sh/master/download.sh | bash`
+
+### manually
+
+- clone the repo
+- run `./setup.sh i` (requires `sudo`)
 
 ## license
 
