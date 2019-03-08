@@ -7,9 +7,11 @@ usage() {
 supa
 
 Usage:
-  ./supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
+  supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
   [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove] [-m|--machines]
   [-b|--reboot-required] [-r|--reboot] [-d|--debug]
+
+  supa.sh up|upgrade
 
 Options:
   -a|--autoremove
@@ -45,6 +47,9 @@ Options:
   -v|--version
           version
 
+  up|upgrade
+          upgrade supa.sh
+
 Examples:
   supa.sh -v
           display version
@@ -75,6 +80,9 @@ Examples:
 
   supa.sh you@remote-host -u -a -r
           same as the former but with the addition of autoremoving of obsolete packages
+
+  supa.sh upgrade
+          upgrade supa.sh to latest version
 
 EOF
 }
@@ -144,6 +152,10 @@ get_args() {
         ;;
       -v|--version)
         printf '%s\n' "$VERSION"
+        exit 0
+        ;;
+      up|upgrade)
+        upgrade
         exit 0
         ;;
       *)

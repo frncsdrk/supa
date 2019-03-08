@@ -4,6 +4,8 @@
 
 INSTALLABLE_NAME="supa.sh"
 
+source "./download.sh"
+
 usage() {
   cat << EOF
 setup
@@ -14,10 +16,13 @@ Synopsis:
 Commands:
   i|install
           install supa.sh and create its manpage
+
   u|uninstall
           uninstall supa.sh and remove its manpage
+
   upgrade
           update manpage
+
 EOF
 }
 
@@ -54,7 +59,7 @@ get_args() {
         uninstall
         exit 0
         ;;
-      upgrade)
+      up|upgrade)
         upgrade
         exit 0
         ;;
@@ -118,8 +123,9 @@ uninstall() {
 }
 
 upgrade() {
-  printf "%s\\n" "Replace man page from /usr/local/man/man8"
+  printf "%s\\n" "Upgrading supa.sh to lates version"
 
+  download
   uninstall
   install
 }

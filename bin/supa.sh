@@ -17,6 +17,8 @@ fi
 # set root directory
 readonly _rel="${_init_directory}/.."
 
+source "${_rel}/setup.sh"
+
 # directories
 readonly _src="${_rel}/src"
 
