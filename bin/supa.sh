@@ -17,9 +17,11 @@ fi
 # set root directory
 readonly _rel="${_init_directory}/.."
 
-source "${_rel}/setup.sh"
-
 # directories
+readonly _lib="${_rel}/lib"
+
+source "${_lib}/installer.sh"
+
 readonly _src="${_rel}/src"
 
 source "${_src}/helpers.sh"
