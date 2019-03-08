@@ -31,7 +31,7 @@ check_os() {
   if [[ "$OSTYPE" == "linux-gnu" ]] || [[ "$OSTYPE" == "linux-musl" ]] ; then
     readonly _dir=$(dirname "$(readlink -f "$0" || echo "$(echo "$0" | sed -e 's,\\,/,g')")")
   else
-    printf "Unsupported system\\n"
+    printf '%s\n' "Unsupported system"
     exit 1
   fi
 }
@@ -52,17 +52,14 @@ get_args() {
         exit 0
         ;;
       i|install)
-        echo "setup install"
         install
         exit 0
         ;;
       r|remove)
-        echo "setup uninstall"
         uninstall
         exit 0
         ;;
       up|upgrade)
-        echo "setup upgrade"
         upgrade
         exit 0
         ;;
@@ -84,7 +81,7 @@ get_args() {
 }
 
 install_manpage() {
-  printf "%s\\n" "Create man page to /usr/local/man/man8"
+  printf '%s\n' "Create man page to /usr/local/man/man8"
 
   if [[ -e "${_dir}/static/man8/${INSTALLABLE_NAME}.8" ]] ; then
     if [[ ! -e "/usr/local/man/man8/${INSTALLABLE_NAME}.8.gz" ]] ; then
@@ -96,7 +93,7 @@ install_manpage() {
 }
 
 install() {
-  printf "%s\\n" "Create symbolic link to /usr/local/bin"
+  printf '%s\n' "Create symbolic link to /usr/local/bin"
 
   if [[ -e "${_dir}/bin/${INSTALLABLE_NAME}" ]] ; then
     if [[ ! -e "/usr/local/bin/${INSTALLABLE_NAME}" ]] ; then
