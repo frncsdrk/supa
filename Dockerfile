@@ -15,6 +15,5 @@ RUN apk -q update \
 # download and install
 RUN curl "$DOWNLOAD_SCRIPT_URL" -sSf | bash
 
-# entrypoint supa.sh
 ENTRYPOINT ["/usr/local/bin/supa.sh"]
 CMD ["--help"]

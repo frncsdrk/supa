@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# upgrade
+# installer
 
 uninstall_manpage() {
   printf '%s\n' "Remove man page from /usr/local/man/man8"

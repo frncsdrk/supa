@@ -10,7 +10,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]] || [[ "$OSTYPE" == "linux-musl" ]] ; then
   readonly _init_name="$(basename "$0")"
   readonly _init_directory=$(dirname "$(readlink -f "$0" || echo "$(echo "$0" | sed -e 's,\\,/,g')")")
 else
-  printf "Unsupported system\\n"
+  printf '%s\n' "Unsupported system"
   exit 1
 fi
 

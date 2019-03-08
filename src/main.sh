@@ -59,5 +59,3 @@ main() {
     fi
   done
 }
-
-# main "$@"
