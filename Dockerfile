@@ -1,5 +1,7 @@
 FROM alpine:3.9
 
+LABEL maintainer="frncsdrk@protonmail.com"
+
 ENV BASH_VERSION 4.4.19-r1
 ENV CURL_VERSION 7.64.0-r1
 ENV DOWNLOAD_SCRIPT_URL "https://raw.githubusercontent.com/frncsdrk/supa.sh/master/download.sh"
