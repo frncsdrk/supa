@@ -109,6 +109,10 @@ Run `curl https://raw.githubusercontent.com/frncsdrk/supa.sh/master/download.sh 
 - clone the repo
 - run `./setup.sh i` (requires `sudo`)
 
+## docker
+
+Use `docker run frncsdrk/supa.sh`
+
 ## license
 
 [MIT](https://github.com/frncsdrk/supa/blob/master/LICENSE) (c) frncsdrk 2019
