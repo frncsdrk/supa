@@ -29,12 +29,12 @@ download() {
   printf '%s\n' "installing to /opt"
 
   if [[ -d "/opt/${INSTALLABLE_NAME}" ]]; then
-    sudo rm -r "/opt/${INSTALLABLE_NAME}"
+    rm -r "/opt/${INSTALLABLE_NAME}"
   fi
-  sudo mv "${EXTRACTED_DIR_NAME}" "/opt/${INSTALLABLE_NAME}"
+  mv "${EXTRACTED_DIR_NAME}" "/opt/${INSTALLABLE_NAME}"
 
   cd "/opt/${INSTALLABLE_NAME}"
-  sudo ./setup.sh i
+  ./setup.sh i
 
   printf '%s\n' "DONE"
 }
