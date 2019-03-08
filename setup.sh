@@ -4,20 +4,18 @@
 
 INSTALLABLE_NAME="supa.sh"
 
-source "./download.sh"
-
 usage() {
   cat << EOF
 setup
 
-Synopsis:
-  ./setup <i|install|u|uninstall|upgrade>
+Usage:
+  ./setup <i|install|r|remove|upgrade>
 
 Commands:
   i|install
           install supa.sh and create its manpage
 
-  u|uninstall
+  r|remove
           uninstall supa.sh and remove its manpage
 
   upgrade
@@ -52,14 +50,17 @@ get_args() {
         exit 0
         ;;
       i|install)
+        echo "setup install"
         install
         exit 0
         ;;
-      u|uninstall)
+      r|remove)
+        echo "setup uninstall"
         uninstall
         exit 0
         ;;
       up|upgrade)
+        echo "setup upgrade"
         upgrade
         exit 0
         ;;
@@ -123,11 +124,10 @@ uninstall() {
 }
 
 upgrade() {
-  printf "%s\\n" "Upgrading supa.sh to lates version"
+  printf "%s\\n" "Upgrading supa.sh to latest version"
 
-  download
   uninstall
-  install
+  source "./download.sh"
 }
 
 main() {
