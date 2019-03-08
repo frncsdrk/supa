@@ -25,7 +25,7 @@ readonly _src="${_rel}/src"
 source "${_src}/helpers.sh"
 source "${_src}/main.sh"
 
-readonly VERSION="v0.13.0"
+readonly VERSION="v0.13.1"
 
 main "${__script_params[@]}"
 
