@@ -2,9 +2,8 @@
 #
 # setup script for supa.sh
 
+source "./src/settings.sh"
 source "./lib/installer.sh"
-
-INSTALLABLE_NAME="supa.sh"
 
 usage() {
   cat << EOF

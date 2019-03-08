@@ -2,9 +2,7 @@
 #
 # download script for supa.sh
 
-INSTALLABLE_NAME="supa.sh"
-DOWNLOAD_URL="https://github.com/frncsdrk/supa.sh/archive/master.tar.gz"
-EXTRACTED_DIR_NAME="${INSTALLABLE_NAME}-master"
+source "./src/settings.sh"
 
 download() {
   if [[ ! -d /tmp ]]; then
