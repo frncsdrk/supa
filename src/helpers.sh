@@ -4,7 +4,7 @@
 
 usage() {
   cat << EOF
-supa
+supa.sh
 
 Usage:
   supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
