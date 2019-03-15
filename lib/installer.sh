@@ -13,7 +13,7 @@ uninstall_manpage() {
 uninstall() {
   printf '%s\n' "Remove installation"
   
-  if [[ -d "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}"]]; then
+  if [[ -d "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}" ]] ; then
     rm -r "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}"
   fi
   
