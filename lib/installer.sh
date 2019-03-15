@@ -11,6 +11,12 @@ uninstall_manpage() {
 }
 
 uninstall() {
+  printf '%s\n' "Remove installation"
+  
+  if [[ -d "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}"]]; then
+    rm -r "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}"
+  fi
+  
   printf '%s\n' "Remove symbolic link from /usr/local/bin"
 
   if [[ -L "/usr/local/bin/${INSTALLABLE_NAME}" ]] ; then

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
-# download script for supa.sh
+# download script for giti.sh
+
+INSTALL_DIRECTORY="/opt"
 
 source "./src/settings.sh"
 
@@ -24,14 +26,18 @@ download() {
   tar -xzf "${TAR_TARGET}"
   rm "${TAR_TARGET}"
 
-  printf '%s\n' "installing to /opt"
-
-  if [[ -d "/opt/${INSTALLABLE_NAME}" ]]; then
-    rm -r "/opt/${INSTALLABLE_NAME}"
+  printf '%s\n' "installing to ${INSTALL_DIRECTORY}"
+  
+  if [[ ! -d "${INSTALL_DIRECTORY}" ]]; then
+    mkdir -p "${INSTALL_DIRECTORY}"
   fi
-  mv "${EXTRACTED_DIR_NAME}" "/opt/${INSTALLABLE_NAME}"
 
-  cd "/opt/${INSTALLABLE_NAME}"
+  if [[ -d "${INSTALL_DIRECTORY}/${INSTALLABLE_NAME}" ]]; then
+    rm -r "${INSTALL_DIRECTORY}/${INSTALLABLE_NAME}"
+  fi
+  mv "${EXTRACTED_DIR_NAME}" "${INSTALL_DIRECTORY}/${INSTALLABLE_NAME}"
+
+  cd "${INSTALL_DIRECTORY}/${INSTALLABLE_NAME}"
   ./setup.sh i
 
   printf '%s\n' "DONE"
