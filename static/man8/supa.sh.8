@@ -1,6 +1,6 @@
 .\" Manpage for supa.sh
 .\" Contact frncsdrk@protonmail.com
-.TH man 8 "15.03.2019" "0.14.1" "supa.sh man page"
+.TH man 8 "07.04.2019" "0.14.1" "supa.sh man page"
 .SH NAME
 supa.sh \- bash tool to update debian-based linux machines
 .SH SYNOPSIS
@@ -84,6 +84,10 @@ supa.sh upgrade
 .SH SEE ALSO
 https://github.com/frncsdrk/supa.sh
 .SH BUGS
-No known bugs.
+In case of a package upgrade which asks if to install the package maintainers version of a config file
+  or to keep the locally modified one the given choice will not be delivered to the machine, getting it
+  stuck in apt upgrade limbo. In this case the situation has to be resolved manually by SSHing into the machine
+  and killing the apt process, then attempting apt upgrade by hand and following the given instructions to fix
+  the situation, if necessary.
 .SH AUTHOR
 frncsdrk (frncsdrk@protonmail.com)
