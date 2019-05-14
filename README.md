@@ -89,6 +89,11 @@ Examples:
 
 ```
 
+### reboot and reboot-required flags
+
+When using the `reboot` or `reboot-required` flag updating and listing of upgradable packages is turned off by default.
+It can be turned on by using the `list` flag.
+
 ### machines file
 
 ```sh

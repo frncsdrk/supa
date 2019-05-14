@@ -7,10 +7,12 @@ build_script() {
   # ensure non interactive mode
   SCRIPT+="export DEBIAN_FRONTEND=noninteractive"
 
-  if [ -z "$REBOOT_REQUIRED" ] || [ ! -z "$LIST" ]; then
-    SCRIPT+=$'\nsudo apt update'
-    if [ -z "$LIST_OFF" ]; then
-      SCRIPT+=$'\napt list --upgradeable'
+  if [ -z "$REBOOT" ] || [ ! -z "$LIST" ]; then
+    if [ -z "$REBOOT_REQUIRED" ] || [ ! -z "$LIST" ]; then
+      SCRIPT+=$'\nsudo apt update'
+      if [ -z "$LIST_OFF" ]; then
+        SCRIPT+=$'\napt list --upgradeable'
+      fi
     fi
   fi
   if [ ! -z "$UPGRADE" ]; then
