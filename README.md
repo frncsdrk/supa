@@ -103,6 +103,13 @@ me@remote-host
 me@remote-host2
 ```
 
+## Known issues
+
+### grub
+
+Updating grub with `supa.sh` is potentially dangerous and can leave your machine unbootable.
+I strongly recommend looking out for grub updates and apply them manually to the machine.
+
 ## installation
 
 ### automatically
