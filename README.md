@@ -4,7 +4,7 @@
 
 > bash tool to update debian-based linux machines, also means soup in Greek
 
-## usage
+## Usage
 
 ```
 supa
@@ -89,12 +89,12 @@ Examples:
 
 ```
 
-### reboot and reboot-required flags
+### Reboot and reboot-required flags
 
 When using the `reboot` or `reboot-required` flag updating and listing of upgradable packages is turned off by default.
 It can be turned on by using the `list` flag.
 
-### machines file
+### Machines file
 
 ```sh
 # my awesome host
@@ -110,7 +110,7 @@ me@remote-host2
 Updating grub with `supa.sh` is potentially dangerous and can leave your machine unbootable.
 I strongly recommend looking out for grub updates and apply them manually to the machine.
 
-## installation
+## Installation
 
 ### automatically
 
@@ -121,10 +121,10 @@ Run `curl https://raw.githubusercontent.com/frncsdrk/supa.sh/master/download.sh 
 - clone the repo
 - run `./setup.sh i` (requires `sudo`)
 
-## docker
+## Docker
 
 Use `docker run frncsdrk/supa.sh`
 
-## license
+## License
 
 [MIT](https://github.com/frncsdrk/supa.sh/blob/master/LICENSE) (c) frncsdrk 2019

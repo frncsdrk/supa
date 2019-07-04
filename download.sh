@@ -14,7 +14,7 @@ download() {
   cd /tmp
 
   if [[ ! -x "$(command -v wget)" ]]; then
-    printf '%s\n' "please install wget to download ${INSTALLABLE_NAME}"
+    printf '%s\n' "Please install wget to download ${INSTALLABLE_NAME}"
   fi
 
   if [[ ! -d "${INSTALLABLE_NAME}" ]]; then
@@ -26,8 +26,8 @@ download() {
   tar -xzf "${TAR_TARGET}"
   rm "${TAR_TARGET}"
 
-  printf '%s\n' "installing to ${INSTALL_DIRECTORY}"
-  
+  printf '%s\n' "Installing to ${INSTALL_DIRECTORY}"
+
   if [[ ! -d "${INSTALL_DIRECTORY}" ]]; then
     mkdir -p "${INSTALL_DIRECTORY}"
   fi
