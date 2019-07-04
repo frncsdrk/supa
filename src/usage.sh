@@ -1,12 +1,9 @@
-# supa.sh
+#!/usr/bin/env bash
+#
+# usage
 
-**S**erver **Up**date with **A**pt
-
-> bash tool to update debian-based linux machines, also means soup in Greek
-
-## Usage
-
-```
+usage() {
+  cat << EOF
 supa.sh
 
 Usage:
@@ -87,44 +84,22 @@ Examples:
   supa.sh self upgrade
           upgrade supa.sh to newest version
 
-```
+EOF
+}
 
-### Reboot and reboot-required flags
+self_usage() {
+  cat << EOF
+supa.sh self
 
-When using the `reboot` or `reboot-required` flag updating and listing of upgradable packages is turned off by default.
-It can be turned on by using the `list` flag.
+Usage:
+  supa.sh self <rm|remove|up|upgrade>
 
-### Machines file
+Commands:
+  rm|remove
+          uninstall supa.sh and remove its manpage
 
-```sh
-# my awesome host
-me@remote-host
-# my second awesome host
-me@remote-host2
-```
+  upgrade
+          update manpage
 
-## Known issues
-
-### grub
-
-Updating grub with `supa.sh` is potentially dangerous and can leave your machine unbootable.
-I strongly recommend looking out for grub updates and apply them manually to the machine.
-
-## Installation
-
-### automatically
-
-Run `curl https://raw.githubusercontent.com/frncsdrk/supa.sh/master/download.sh | bash`
-
-### manually
-
-- clone the repo
-- run `./setup.sh i` (requires `sudo`)
-
-## Docker
-
-Use `docker run frncsdrk/supa.sh`
-
-## License
-
-[MIT](https://github.com/frncsdrk/supa.sh/blob/master/LICENSE) (c) frncsdrk 2019
+EOF
+}

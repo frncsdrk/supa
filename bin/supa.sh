@@ -25,6 +25,7 @@ source "${_lib}/installer.sh"
 readonly _src="${_rel}/src"
 
 source "${_src}/settings.sh"
+source "${_src}/usage.sh"
 source "${_src}/helpers.sh"
 source "${_src}/main.sh"
 

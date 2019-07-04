@@ -2,91 +2,6 @@
 #
 # helpers
 
-usage() {
-  cat << EOF
-supa.sh
-
-Usage:
-  supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
-  [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove] [-m|--machines]
-  [-b|--reboot-required] [-r|--reboot] [-d|--debug]
-
-  supa.sh up|upgrade
-
-Options:
-  -a|--autoremove
-          autoremove
-
-  -b|--reboot-required
-          reboot required
-
-  -d|--debug
-          enable debug mode
-
-  -h|--help
-          show this message
-
-  -i|--identity
-          identity
-
-  -l|--list
-          list
-
-  --list-off
-          list off, only update
-
-  -m|--machines
-          use given machines file
-
-  -r|--reboot
-          reboot
-
-  -u|--upgrade
-          upgrade
-
-  -v|--version
-          version
-
-  up|upgrade
-          upgrade supa.sh
-
-Examples:
-  supa.sh -v
-          display version
-
-  supa.sh -h
-          display this message
-
-  supa.sh you@remote-host -b
-          is machine reboot required
-
-  supa.sh you@remote-host -b -l
-          is machine reboot required, but list upgradeable packages as well
-
-  supa.sh -m production -b -l
-          same as previous but use machines file
-
-  supa.sh you@remote-host
-          run apt update and apt list --upgradeable
-
-  supa.sh you@remote-host -u
-          same as the former but with the addition of upgrading all packages
-
-  supa.sh you@remote-host -u <package>
-          same as the former but with the addition of upgrading one single package
-
-  supa.sh you@remote-host -u -r
-          same as the former but with the addition of allowing reboot if necessary
-
-  supa.sh you@remote-host -u -a -r
-          same as the former but with the addition of autoremoving of obsolete packages
-
-  supa.sh upgrade
-          upgrade supa.sh to latest version
-
-EOF
-}
-
 generate_machines_list() {
   if [ -v MACHINES_FILE ]; then
     machines=$(cat $MACHINES_FILE | grep -v "^$\|^\s*\#")
@@ -154,8 +69,32 @@ get_args() {
         printf '%s\n' "$VERSION"
         exit 0
         ;;
-      up|upgrade)
-        upgrade
+      self)
+        if [[ -z $2 ]]; then
+          self_usage
+          exit 0
+        fi
+
+        local self_key=$2
+
+        case $self_key in
+          -h|--help)
+            self_usage
+            exit 0
+            ;;
+          rm|remove)
+            uninstall
+            exit 0
+            ;;
+          up|upgrade)
+            upgrade
+            exit 0
+            ;;
+          *)
+            self_usage
+            exit 0
+            ;;
+        esac
         exit 0
         ;;
       *)

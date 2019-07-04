@@ -2,6 +2,16 @@
 #
 # installer
 
+# ensure linux
+check_os() {
+  if [[ "$OSTYPE" == "linux-gnu" ]] || [[ "$OSTYPE" == "linux-musl" ]] ; then
+    readonly _dir=$(dirname "$(readlink -f "$0" || echo "$(echo "$0" | sed -e 's,\\,/,g')")")
+  else
+    printf '%s\n' "Unsupported system"
+    exit 1
+  fi
+}
+
 uninstall_manpage() {
   printf '%s\n' "Remove man page from /usr/local/man/man8"
 
@@ -12,11 +22,11 @@ uninstall_manpage() {
 
 uninstall() {
   printf '%s\n' "Remove installation"
-  
+
   if [[ -d "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}" ]]; then
     rm -r "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}"
   fi
-  
+
   printf '%s\n' "Remove symbolic link from /usr/local/bin"
 
   if [[ -L "/usr/local/bin/${INSTALLABLE_NAME}" ]]; then

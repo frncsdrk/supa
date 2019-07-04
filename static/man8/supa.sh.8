@@ -1,6 +1,6 @@
 .\" Manpage for supa.sh
 .\" Contact frncsdrk@protonmail.com
-.TH man 8 "04.07.2019" "0.15.1" "supa.sh man page"
+.TH man 8 "04.07.2019" "0.16.0" "supa.sh man page"
 .SH NAME
 supa.sh \- bash tool to update debian-based linux machines
 .SH SYNOPSIS
@@ -8,7 +8,7 @@ supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
   [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove] [-m|--machines]
   [-b|--reboot-required] [-r|--reboot] [-d|--debug]
 
-supa.sh up|upgrade
+supa.sh self
 .SH DESCRIPTION
 supa.sh is a bash tool to update debian-based linux machines, also means soup in Greek
 .SH OPTIONS
@@ -45,8 +45,8 @@ supa.sh is a bash tool to update debian-based linux machines, also means soup in
 -v|--version
         version
 
-up|upgrade
-        upgrade supa.sh
+self
+        self command
 
 .SH EXAMPLES
 supa.sh -v
@@ -79,8 +79,8 @@ supa.sh you@remote-host -u -r
 supa.sh you@remote-host -u -a -r
         same as the former but with the addition of autoremoving of obsolete packages
 
-supa.sh upgrade
-        upgrade supa.sh to latest version
+supa.sh self upgrade
+        upgrade supa.sh to newest version
 .SH SEE ALSO
 https://github.com/frncsdrk/supa.sh
 .SH BUGS
