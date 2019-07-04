@@ -34,6 +34,7 @@ build_script() {
       SCRIPT+=$'\n  printf \'%s\n\n\'   "###########################"'
     fi
     if [ ! -z "$REBOOT" ]; then
+      SCRIPT+=$'\n  printf \'%s\n\n\'   "rebooting..."'
       SCRIPT+=$'\n  sudo /sbin/reboot now'
     fi
     SCRIPT+=$'\nfi'
