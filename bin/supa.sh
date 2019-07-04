@@ -28,7 +28,7 @@ source "${_src}/settings.sh"
 source "${_src}/helpers.sh"
 source "${_src}/main.sh"
 
-readonly VERSION="v0.15.0"
+readonly VERSION="v0.15.1"
 
 main "${__script_params[@]}"
 
