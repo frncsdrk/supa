@@ -30,7 +30,7 @@ get_args() {
         REBOOT_REQUIRED=1
         shift
         ;;
-      -d|--debug)
+      -D|--debug)
         DEBUG=1
         shift
         ;;
@@ -65,7 +65,7 @@ get_args() {
         fi
         shift 2
         ;;
-      -v|--version)
+      -V|--version)
         printf '%s\n' "$VERSION"
         exit 0
         ;;

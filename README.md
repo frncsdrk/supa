@@ -10,9 +10,9 @@
 supa.sh
 
 Usage:
-  supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
+  supa.sh <user>@<host> [-h|--help] [-V|--version] [-l|--list] [--list-off]
   [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove] [-m|--machines]
-  [-b|--reboot-required] [-r|--reboot] [-d|--debug]
+  [-b|--reboot-required] [-r|--reboot] [-D|--debug]
 
   supa.sh self
 
@@ -23,7 +23,7 @@ Options:
   -b|--reboot-required
           reboot required
 
-  -d|--debug
+  -D|--debug
           enable debug mode
 
   -h|--help
@@ -47,14 +47,14 @@ Options:
   -u|--upgrade
           upgrade
 
-  -v|--version
+  -V|--version
           version
 
   self
           self command
 
 Examples:
-  supa.sh -v
+  supa.sh -V
           display version
 
   supa.sh -h

@@ -4,9 +4,9 @@
 .SH NAME
 supa.sh \- bash tool to update debian-based linux machines
 .SH SYNOPSIS
-supa.sh <user>@<host> [-h|--help] [-v|--version] [-l|--list] [--list-off]
+supa.sh <user>@<host> [-h|--help] [-V|--version] [-l|--list] [--list-off]
   [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove] [-m|--machines]
-  [-b|--reboot-required] [-r|--reboot] [-d|--debug]
+  [-b|--reboot-required] [-r|--reboot] [-D|--debug]
 
 supa.sh self
 .SH DESCRIPTION
@@ -18,7 +18,7 @@ supa.sh is a bash tool to update debian-based linux machines, also means soup in
 -b|--reboot-required
         reboot required
 
--d|--debug
+-D|--debug
         enable debug mode
 
 -h|--help
@@ -42,14 +42,14 @@ supa.sh is a bash tool to update debian-based linux machines, also means soup in
 -u|--upgrade
         upgrade
 
--v|--version
+-V|--version
         version
 
 self
         self command
 
 .SH EXAMPLES
-supa.sh -v
+supa.sh -V
         display version
 
 supa.sh -h
