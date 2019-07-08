@@ -114,7 +114,7 @@ I strongly recommend looking out for grub updates and apply them manually to the
 
 ### automatically
 
-Run `curl https://raw.githubusercontent.com/frncsdrk/supa.sh/master/download.sh | bash`
+Run `curl https://raw.githubusercontent.com/frncsdrk/supa.sh/master/download.sh -sSf | sudo bash`
 
 ### manually
 
