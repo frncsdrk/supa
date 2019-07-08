@@ -2,9 +2,10 @@
 #
 # download script for giti.sh
 
-INSTALL_DIRECTORY="/opt"
-
-source "./src/settings.sh"
+INSTALLABLE_NAME="supa.sh"
+INSTALL_DIRECTORY_PATH="/opt"
+DOWNLOAD_URL="https://github.com/frncsdrk/${INSTALLABLE_NAME}/archive/master.tar.gz"
+EXTRACTED_DIR_NAME="${INSTALLABLE_NAME}-master"
 
 download() {
   if [[ ! -d /tmp ]]; then
@@ -26,18 +27,18 @@ download() {
   tar -xzf "${TAR_TARGET}"
   rm "${TAR_TARGET}"
 
-  printf '%s\n' "Installing to ${INSTALL_DIRECTORY}"
+  printf '%s\n' "Installing to ${INSTALL_DIRECTORY_PATH}"
 
-  if [[ ! -d "${INSTALL_DIRECTORY}" ]]; then
-    mkdir -p "${INSTALL_DIRECTORY}"
+  if [[ ! -d "${INSTALL_DIRECTORY_PATH}" ]]; then
+    mkdir -p "${INSTALL_DIRECTORY_PATH}"
   fi
 
-  if [[ -d "${INSTALL_DIRECTORY}/${INSTALLABLE_NAME}" ]]; then
-    rm -r "${INSTALL_DIRECTORY}/${INSTALLABLE_NAME}"
+  if [[ -d "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}" ]]; then
+    rm -r "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}"
   fi
-  mv "${EXTRACTED_DIR_NAME}" "${INSTALL_DIRECTORY}/${INSTALLABLE_NAME}"
+  mv "${EXTRACTED_DIR_NAME}" "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}"
 
-  cd "${INSTALL_DIRECTORY}/${INSTALLABLE_NAME}"
+  cd "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}"
   ./setup.sh i
 
   printf '%s\n' "DONE"
