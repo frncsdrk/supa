@@ -47,7 +47,7 @@ upgrade() {
   cp "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}/download.sh" "/tmp/supa-download.sh"
 
   uninstall
-  source "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}/download.sh"
+  source "/tmp/supa-download.sh"
 
   printf '%s\n' "Removing temporary supa.sh download script"
   rm "/tmp/supa-download.sh"
