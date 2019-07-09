@@ -103,7 +103,7 @@ me@remote-host
 me@remote-host2
 ```
 
-## Known issues
+## Bugs
 
 ### grub
 
