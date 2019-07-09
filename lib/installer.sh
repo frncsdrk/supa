@@ -39,6 +39,16 @@ uninstall() {
 upgrade() {
   printf '%s\n' "Upgrading supa.sh to latest version"
 
+  if [[ ! -d /tmp ]]; then
+    mkdir /tmp
+  fi
+
+  printf '%s\n' "Creating temporary supa.sh download script"
+  cp "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}/download.sh" "/tmp/supa-download.sh"
+
   uninstall
   source "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}/download.sh"
+
+  printf '%s\n' "Removing temporary supa.sh download script"
+  rm "/tmp/supa-download.sh"
 }
