@@ -40,5 +40,5 @@ upgrade() {
   printf '%s\n' "Upgrading supa.sh to latest version"
 
   uninstall
-  source "./download.sh"
+  source "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}/download.sh"
 }
