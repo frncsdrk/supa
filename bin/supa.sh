@@ -5,7 +5,7 @@
 # call parameters
 __script_params=("$@")
 
-if [[ "$OSTYPE" == "linux-gnu" ]] || [[ "$OSTYPE" == "linux-musl" ]] ; then
+if [[ "$OSTYPE" == "linux-gnu" ]] || [[ "$OSTYPE" == "linux-musl" ]] || [[ "$OSTYPE" == "darwin" ]] ; then
   # store name of the script and directory call
   readonly _init_name="$(basename "$0")"
   readonly _init_directory=$(dirname "$(readlink -f "$0" || echo "$(echo "$0" | sed -e 's,\\,/,g')")")
