@@ -66,7 +66,7 @@ get_args() {
         shift 2
         ;;
       -V|--version)
-        printf '%s\n' "$VERSION"
+        printf '%s\n' "${VERSION}"
         exit 0
         ;;
       self)
