@@ -8,7 +8,7 @@ supa.sh
 
 Usage:
   supa.sh <user>@<host> [-h|--help] [-V|--version] [-l|--list] [--list-off]
-  [-i|--identity <identity file>] [-u|--upgrade <package>] [-a|--autoremove] [-m|--machines]
+  [-i|--identity <identity file>] [-u|--upgrade [package] [-a|--autoremove] [-m|--machines]
   [-b|--reboot-required] [-r|--reboot] [-D|--debug]
 
   supa.sh self
