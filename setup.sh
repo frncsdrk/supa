@@ -52,10 +52,6 @@ get_args() {
         upgrade
         exit 0
         ;;
-      -v|--version)
-        printf '%s\n' "$VERSION"
-        exit 0
-        ;;
       *)
         # get operator
         if [[ $1 =~ ^.+@.+$ ]]; then
