@@ -127,4 +127,4 @@ Use `docker run frncsdrk/supa.sh`
 
 ## License
 
-[MIT](https://github.com/frncsdrk/supa.sh/blob/master/LICENSE) (c) frncsdrk 2019
+[MIT](https://github.com/frncsdrk/supa.sh/blob/master/LICENSE) (c) frncsdrk 2019 - present
