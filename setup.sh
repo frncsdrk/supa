@@ -87,6 +87,8 @@ install() {
   fi
 
   install_manpage
+
+  printf '%s\n' "DONE"
 }
 
 main() {

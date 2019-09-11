@@ -53,4 +53,6 @@ upgrade() {
 
   printf '%s\n' "Removing temporary supa.sh download script"
   rm "${tmp_script_location}"
+
+  printf '%s\n' "DONE"
 }

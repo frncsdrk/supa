@@ -4,7 +4,7 @@
 
 INSTALLABLE_NAME="supa.sh"
 INSTALL_DIRECTORY_PATH="/opt"
-DOWNLOAD_URL="https://github.com/frncsdrk/${INSTALLABLE_NAME}/archive/master.tar.gz"
+DOWNLOAD_URL="https://github.com/frncsdrk/${INSTALLABLE_NAME}/archive/0.16.8.tar.gz"
 EXTRACTED_DIR_NAME="${INSTALLABLE_NAME}-master"
 
 download() {
@@ -40,8 +40,6 @@ download() {
 
   cd "${INSTALL_DIRECTORY_PATH}/${INSTALLABLE_NAME}" || exit 1
   ./setup.sh i
-
-  printf '%s\n' "DONE"
 }
 
 main() {
