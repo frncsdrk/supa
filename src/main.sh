@@ -17,10 +17,10 @@ build_script() {
   fi
   if [ ! -z "${UPGRADE}" ]; then
     if [ ! -z "${UPGRADE_PACKAGE}" ]; then
-      SCRIPT+=$'\nsudo -E apt install -q --only-upgrade '
+      SCRIPT+=$'\nsudo apt install -q --only-upgrade '
       SCRIPT+="${UPGRADE_PACKAGE}"
     else
-      SCRIPT+=$'\nsudo -E apt -q upgrade -y'
+      SCRIPT+=$'\nsudo apt -q upgrade -y'
     fi
   fi
   if [ ! -z "${AUTOREMOVE}" ]; then
