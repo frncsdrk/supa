@@ -125,6 +125,16 @@ Run `curl https://raw.githubusercontent.com/frncsdrk/supa.sh/master/download.sh 
 
 Use `docker run frncsdrk/supa.sh`
 
+## Development
+
+### Release preparation
+
+Update version number (and date) in following files
+
+- `download.sh`
+- `bin/supa.sh`
+- `static/man8/supa.sh.man8`
+
 ## License
 
 [MIT](https://github.com/frncsdrk/supa.sh/blob/master/LICENSE) (c) frncsdrk 2018 - present
