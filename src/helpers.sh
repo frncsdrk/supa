@@ -62,8 +62,10 @@ get_args() {
         UPGRADE=1
         if [[ $2 != "-"* ]]; then
           UPGRADE_PACKAGE="$2"
+          shift 2
+        else
+          shift
         fi
-        shift 2
         ;;
       -V|--version)
         printf '%s\n' "${VERSION}"
