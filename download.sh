@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# download script for giti.sh
+# download script for supa.sh
 
 INSTALLABLE_NAME="supa.sh"
 INSTALL_DIRECTORY_PATH="/opt"
