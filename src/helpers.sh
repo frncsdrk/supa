@@ -67,6 +67,10 @@ get_args() {
           shift
         fi
         ;;
+      -v|--verbose)
+        VERBOSE=1
+        shift
+        ;;
       -V|--version)
         printf '%s\n' "${VERSION}"
         exit 0
@@ -110,4 +114,13 @@ get_args() {
     esac
   done
   set -- "${POSITIONAL[@]}"
+}
+
+build_cmd() {
+  executed_cmd="supa.sh"
+
+  for arg in "$@"; do
+    executed_cmd+=" "
+    executed_cmd+="$arg"
+  done
 }

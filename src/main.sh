@@ -54,6 +54,11 @@ main() {
   do
     printf '\n%s\n' '###'
     printf '%s\n' "# ${machine}"
+    if [ ! -z "${VERBOSE}" ]; then
+      printf '%s\n' '##'
+      build_cmd "$@"
+      printf '%s\n' "# cmd: ${executed_cmd}"
+    fi
     printf '%s\n\n' '###'
     if [ ! -z "${IDENTITY}" ]; then
       ssh -i "${IDENTITY}" -o IdentitiesOnly=yes "${machine}" "${SCRIPT}"
