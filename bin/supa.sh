@@ -29,7 +29,7 @@ source "${_src}/usage.sh"
 source "${_src}/helpers.sh"
 source "${_src}/main.sh"
 
-readonly VERSION="v0.16.8 (2019-09-11)"
+readonly VERSION="v0.17.0 (2019-10-16)"
 
 main "${__script_params[@]}"
 
