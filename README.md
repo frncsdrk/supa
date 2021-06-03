@@ -140,4 +140,4 @@ Update version number (and date) in following files
 
 ## License
 
-[MIT](https://github.com/frncsdrk/supa.sh/blob/master/LICENSE) (c) frncsdrk 2018 - 2019
+[MIT](https://github.com/frncsdrk/supa.sh/blob/master/LICENSE) (c) frncsdrk 2018 - 2021
